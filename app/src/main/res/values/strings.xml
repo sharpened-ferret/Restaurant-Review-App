@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">Restaurant Review App</string>
+    <string name="restaurant_search_title">Search</string>
+    <string name="restaurant_filter_title">Filter</string>
+    <string name="restaurant_refresh_title">Refresh</string>
+    <string name="restaurant_logout_title">Logout</string>
+    <string name="restaurant_account_title">Account</string>
+    <string name="refresh_message">Page Refresh Notification (Placeholder)</string>
+
+    <string name="kilometers">km</string>
+    <string name="restaurant_label">Restaurant:</string>
+    <string name="distance_label">Distance:</string>
+    <string name="num_reviews_label">Number of Reviews:</string>
+
+    <string name="turtle_bay">Turtle Bay</string>
+    <string name="new_york_pizza">"New York Pizza"</string>
+    <string name="monnis">Monni\'s Fish Bar</string>
+    <string name="basekamp">BASEKAMP</string>
+
+    <string name="username_heading">Username: </string>
+    <string name="email_heading">Email: </string>
+    <string name="password_heading">Password: </string>
+    <string name="change_password">Change Password</string>
+
+    <string-array name="mainTabTitles">
+        <item>Restaurants</item>
+        <item>Map</item>
+    </string-array>
+<!--    <string name="restaurants_tab_title">Restaurants</string>-->
+<!--    <string name="map_tab_title">Map</string>-->
+
+    <string name="account">Account</string>
+    <string name="settings_tab_title">Settings</string>
+    <string name="reviews_tab_title">My Reviews</string>
+    <string name="display_settings_heading">Display Settings: </string>
+    <string name="dark_mode">Dark Mode</string>
+</resources>
