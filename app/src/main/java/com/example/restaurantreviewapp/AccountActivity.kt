@@ -8,7 +8,10 @@ import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.NavUtils
 import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2
+import com.example.restaurantreviewapp.adapter.AccountTabAdapter
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
 
 class AccountActivity : AppCompatActivity() {
@@ -21,12 +24,24 @@ class AccountActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true);
 
-        val usernameText = findViewById<TextView>(R.id.username)
-        usernameText.setText("Bobby Droptable")
-        val emailText = findViewById<TextView>(R.id.email)
-        emailText.setText("bobby@example.com")
-        val passwordText = findViewById<TextView>(R.id.password)
-        passwordText.setText("**********")
+        val tabLayout = findViewById<TabLayout>(R.id.tab_layout)
+        val viewPager = findViewById<ViewPager2>(R.id.view_pager)
+
+        val tabTitles = resources.getStringArray(R.array.accountTabTitles)
+        viewPager.adapter = AccountTabAdapter(this)
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            when (position) {
+                0 -> tab.text = tabTitles[0]
+                1 -> tab.text = tabTitles[1]
+            }
+        }.attach()
+
+//        val usernameText = findViewById<TextView>(R.id.username)
+//        usernameText.setText("Bobby Droptable")
+//        val emailText = findViewById<TextView>(R.id.email)
+//        emailText.setText("bobby@example.com")
+//        val passwordText = findViewById<TextView>(R.id.password)
+//        passwordText.setText("**********")
 
 
 

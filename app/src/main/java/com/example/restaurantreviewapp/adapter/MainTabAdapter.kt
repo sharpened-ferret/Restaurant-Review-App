@@ -6,7 +6,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.restaurantreviewapp.fragment.MapFragment
 import com.example.restaurantreviewapp.fragment.RestaurantsFragment
 
-class TabAdapter (activity: AppCompatActivity) : FragmentStateAdapter(activity) {
+class MainTabAdapter (activity: AppCompatActivity) : FragmentStateAdapter(activity) {
     override fun createFragment(index: Int): Fragment {
         when (index) {
             0 -> return RestaurantsFragment()

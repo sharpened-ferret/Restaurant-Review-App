@@ -26,12 +26,13 @@
         <item>Restaurants</item>
         <item>Map</item>
     </string-array>
-<!--    <string name="restaurants_tab_title">Restaurants</string>-->
-<!--    <string name="map_tab_title">Map</string>-->
+
+    <string-array name="accountTabTitles">
+        <item>Settings</item>
+        <item>My Reviews</item>
+    </string-array>
 
     <string name="account">Account</string>
-    <string name="settings_tab_title">Settings</string>
-    <string name="reviews_tab_title">My Reviews</string>
     <string name="display_settings_heading">Display Settings: </string>
     <string name="dark_mode">Dark Mode</string>
 </resources>

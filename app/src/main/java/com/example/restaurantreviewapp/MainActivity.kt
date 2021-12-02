@@ -7,7 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.widget.Toolbar
 import androidx.viewpager2.widget.ViewPager2
-import com.example.restaurantreviewapp.adapter.TabAdapter
+import com.example.restaurantreviewapp.adapter.MainTabAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         val viewPager = findViewById<ViewPager2>(R.id.view_pager)
 
         val tabTitles = resources.getStringArray(R.array.mainTabTitles)
-        viewPager.adapter = TabAdapter(this)
+        viewPager.adapter = MainTabAdapter(this)
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             when (position) {
                 0 -> tab.text = tabTitles[0]
