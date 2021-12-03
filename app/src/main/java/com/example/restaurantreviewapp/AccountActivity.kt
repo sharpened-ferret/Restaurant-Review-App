@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.NavUtils
 import androidx.viewpager2.widget.ViewPager2
@@ -34,16 +33,6 @@ class AccountActivity : AppCompatActivity() {
                 1 -> tab.text = tabTitles[1]
             }
         }.attach()
-
-//        val usernameText = findViewById<TextView>(R.id.username)
-//        usernameText.setText("Bobby Droptable")
-//        val emailText = findViewById<TextView>(R.id.email)
-//        emailText.setText("bobby@example.com")
-//        val passwordText = findViewById<TextView>(R.id.password)
-//        passwordText.setText("**********")
-
-
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

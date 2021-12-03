@@ -18,12 +18,12 @@ class RestaurantsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val imageModelArrayList = populateList()
+        val restaurantModelArrayList = populateList()
 
         val recyclerView = view.findViewById<View>(R.id.restaurant_recycler_view) as RecyclerView // Bind to the recyclerview in the layout
         val layoutManager = LinearLayoutManager(view.context) // Get the layout manager
         recyclerView.layoutManager = layoutManager
-        val mAdapter = RestaurantAdapter(imageModelArrayList)
+        val mAdapter = RestaurantAdapter(restaurantModelArrayList)
         recyclerView.adapter = mAdapter
     }
 
