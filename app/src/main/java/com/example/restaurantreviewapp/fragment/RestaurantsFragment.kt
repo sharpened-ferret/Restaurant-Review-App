@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.restaurantreviewapp.R
-import com.example.restaurantreviewapp.RestaurantAdapter
+import com.example.restaurantreviewapp.adapter.RestaurantAdapter
 import com.example.restaurantreviewapp.RestaurantModel
 
 class RestaurantsFragment : Fragment() {

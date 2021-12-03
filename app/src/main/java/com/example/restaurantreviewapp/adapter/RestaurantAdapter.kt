@@ -1,10 +1,12 @@
-package com.example.restaurantreviewapp
+package com.example.restaurantreviewapp.adapter
 
 import android.view.LayoutInflater
 import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.example.restaurantreviewapp.R
+import com.example.restaurantreviewapp.RestaurantModel
 import com.google.android.material.snackbar.Snackbar
 
 class RestaurantAdapter(private val imageModelArrayList: MutableList<RestaurantModel>) : RecyclerView.Adapter<RestaurantAdapter.ViewHolder>() {

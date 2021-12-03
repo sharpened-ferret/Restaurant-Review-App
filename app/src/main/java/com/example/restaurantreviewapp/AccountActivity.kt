@@ -7,7 +7,6 @@ import android.view.MenuItem
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.NavUtils
-import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.restaurantreviewapp.adapter.AccountTabAdapter
 import com.google.android.material.tabs.TabLayout

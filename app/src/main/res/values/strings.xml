@@ -35,4 +35,6 @@
     <string name="account">Account</string>
     <string name="display_settings_heading">Display Settings: </string>
     <string name="dark_mode">Dark Mode</string>
+
+    <string name="my_reviews_label">My Reviews</string>
 </resources>
