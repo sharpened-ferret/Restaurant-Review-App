@@ -23,6 +23,9 @@ class MainActivity : AppCompatActivity() {
         val tabLayout = findViewById<TabLayout>(R.id.tab_layout)
         val viewPager = findViewById<ViewPager2>(R.id.view_pager)
 
+        //Disables swiping between views to prevent accidental navigation from the map tab
+        viewPager.isUserInputEnabled = false;
+
         val tabTitles = resources.getStringArray(R.array.mainTabTitles)
         viewPager.adapter = MainTabAdapter(this)
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->

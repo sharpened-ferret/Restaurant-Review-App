@@ -43,8 +43,8 @@ class RestaurantAdapter(private val imageModelArrayList: MutableList<RestaurantM
 
         override fun onClick(v: View) {
             val name = name.text
-            val distance = distance
-            val numReviews = numReviews
+            val distance = distance.text
+            val numReviews = numReviews.text
             val snackbar = Snackbar.make(v, "$name $distance $numReviews", Snackbar.LENGTH_LONG)
             snackbar.show()
         }
