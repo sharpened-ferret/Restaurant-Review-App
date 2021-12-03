@@ -24,13 +24,18 @@ class AccountActivity : AppCompatActivity() {
 
         val tabLayout = findViewById<TabLayout>(R.id.tab_layout)
         val viewPager = findViewById<ViewPager2>(R.id.view_pager)
+        viewPager.setUserInputEnabled(false)
 
         val tabTitles = resources.getStringArray(R.array.accountTabTitles)
         viewPager.adapter = AccountTabAdapter(this)
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             when (position) {
-                0 -> tab.text = tabTitles[0]
-                1 -> tab.text = tabTitles[1]
+                0 -> {
+                    tab.text = tabTitles[0]
+                }
+                1 -> {
+                    tab.text = tabTitles[1]
+                }
             }
         }.attach()
     }

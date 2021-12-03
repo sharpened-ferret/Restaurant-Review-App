@@ -37,4 +37,5 @@
     <string name="dark_mode">Dark Mode</string>
 
     <string name="my_reviews_label">My Reviews</string>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>
