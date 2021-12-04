@@ -4,20 +4,20 @@
     <item
         android:id="@+id/search"
         android:icon="@drawable/restaurant_search"
-        android:title="@string/restaurant_search_title"
+        android:title="@string/search_title"
         app:showAsAction="always" />
     <item
         android:id="@+id/filter"
         android:icon="@drawable/restaurant_filter"
-        android:title="@string/restaurant_filter_title"
+        android:title="@string/filter_title"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/refresh"
-        android:title="@string/restaurant_refresh_title" />
+        android:title="@string/refresh_title" />
     <item
         android:id="@+id/account"
-        android:title="@string/restaurant_account_title" />
+        android:title="@string/account_title" />
     <item
         android:id="@+id/logout"
-        android:title="@string/restaurant_logout_title" />
+        android:title="@string/logout_title" />
 </menu>

@@ -5,21 +5,28 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.viewpager2.widget.ViewPager2
 import com.example.restaurantReviewApp.adapters.MainTabAdapter
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
+import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_LONG
+import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_SHORT
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.FirebaseAuth
 
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var menu : Menu
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
 
         val mainToolbar = findViewById<Toolbar>(R.id.main_toolbar)
         setSupportActionBar(mainToolbar)
@@ -44,6 +51,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate((R.menu.toolbar_layout), menu)
+        if (menu != null) {
+            this.menu = menu
+            menu.findItem(R.id.account).isVisible = false
+        }
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -62,7 +73,13 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
             R.id.logout -> {
-                signOut()
+                val currentUser = FirebaseAuth.getInstance().currentUser
+                if (currentUser != null) {
+                    signOut()
+                }
+                else {
+                    createSignInIntent()
+                }
             }
         }
         return super.onOptionsItemSelected(item)
@@ -89,12 +106,15 @@ class MainActivity : AppCompatActivity() {
         if (result.resultCode == RESULT_OK) {
             // Successfully signed in
             val user = FirebaseAuth.getInstance().currentUser
+            menu.findItem(R.id.logout).title = resources.getString(R.string.logout_title)
+            menu.findItem(R.id.account).isVisible = true
             // ...
         } else {
             // Sign in failed. If response is null the user canceled the
             // sign-in flow using the back button. Otherwise check
             // response.getError().getErrorCode() and handle the error.
             // ...
+            menu.findItem(R.id.logout).title = resources.getString(R.string.login_title)
         }
     }
 
@@ -103,6 +123,11 @@ class MainActivity : AppCompatActivity() {
             .signOut(this)
             .addOnCompleteListener {
                 // ...
+                menu.findItem(R.id.logout).title = resources.getString(R.string.login_title)
+                menu.findItem(R.id.account).isVisible = false
+                val view : View = findViewById(R.id.view_pager)
+                val snackbar = Snackbar.make(view,resources.getString(R.string.logout_message), LENGTH_SHORT )
+                snackbar.show()
             }
     }
 

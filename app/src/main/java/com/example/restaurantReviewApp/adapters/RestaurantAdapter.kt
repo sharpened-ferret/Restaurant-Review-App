@@ -11,7 +11,7 @@ import com.example.restaurantReviewApp.*
 import com.example.restaurantReviewApp.models.RestaurantModel
 import com.google.android.material.snackbar.Snackbar
 
-class RestaurantAdapter(private val imageModelArrayList: MutableList<RestaurantModel>) : RecyclerView.Adapter<RestaurantAdapter.ViewHolder>() {
+class RestaurantAdapter(private val restaurantModelArrayList: MutableList<RestaurantModel>) : RecyclerView.Adapter<RestaurantAdapter.ViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -23,7 +23,7 @@ class RestaurantAdapter(private val imageModelArrayList: MutableList<RestaurantM
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val info = imageModelArrayList[position]
+        val info = restaurantModelArrayList[position]
 
         holder.name.text = info.getName()
         holder.distance.text = info.getDistance().toString() + "km"
@@ -31,7 +31,7 @@ class RestaurantAdapter(private val imageModelArrayList: MutableList<RestaurantM
     }
 
     override fun getItemCount(): Int {
-        return imageModelArrayList.size
+        return restaurantModelArrayList.size
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {

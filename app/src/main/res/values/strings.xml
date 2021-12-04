@@ -1,10 +1,13 @@
 <resources>
     <string name="app_name">Restaurant Review App</string>
-    <string name="restaurant_search_title">Search</string>
-    <string name="restaurant_filter_title">Filter</string>
-    <string name="restaurant_refresh_title">Refresh</string>
-    <string name="restaurant_logout_title">Logout</string>
-    <string name="restaurant_account_title">Account</string>
+    <string name="search_title">Search</string>
+    <string name="filter_title">Filter</string>
+    <string name="refresh_title">Refresh</string>
+    <string name="logout_title">Logout</string>
+    <string name="login_title">Login</string>
+    <string name="account_title">Account</string>
+
+    <string name="logout_message">You\'re now logged out</string>
 
     <string name="restaurant_label">Restaurant:</string>
     <string name="distance_label">Distance:</string>
