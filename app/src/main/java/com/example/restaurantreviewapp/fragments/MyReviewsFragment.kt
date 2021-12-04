@@ -8,8 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.restaurantreviewapp.R
-import com.example.restaurantreviewapp.models.RestaurantModel
-import com.example.restaurantreviewapp.adapters.RestaurantAdapter
+import com.example.restaurantreviewapp.adapters.ReviewAdapter
+import com.example.restaurantreviewapp.models.ReviewModel
 
 class MyReviewsFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
@@ -18,28 +18,30 @@ class MyReviewsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val restaurantModelArrayList = populateList()
+        val reviewModelArrayList = populateList()
 
-        val recyclerView = view.findViewById<View>(R.id.restaurant_recycler_view) as RecyclerView // Bind to the recyclerview in the layout
+        val recyclerView = view.findViewById<View>(R.id.review_recycler_view) as RecyclerView // Bind to the recyclerview in the layout
         val layoutManager = LinearLayoutManager(view.context) // Get the layout manager
         recyclerView.layoutManager = layoutManager
-        val mAdapter = RestaurantAdapter(restaurantModelArrayList)
+        val mAdapter = ReviewAdapter(reviewModelArrayList)
         recyclerView.adapter = mAdapter
     }
 
-    private fun populateList() : ArrayList<RestaurantModel> {
-        val list = ArrayList<RestaurantModel>()
+    private fun populateList() : ArrayList<ReviewModel> {
+        val list = ArrayList<ReviewModel>()
         val nameList = arrayOf(R.string.new_york_pizza, R.string.monnis, R.string.turtle_bay, R.string.basekamp)
         val distanceList = arrayOf(0.2, 0.3, 1.2, 1.4)
         val numReviewsList = arrayOf(3, 0, 2, 8)
 
         for (i in 0..3) {
-            val restaurant = RestaurantModel()
-            restaurant.setName(getString(nameList[i]))
-            restaurant.setDistance(distanceList[i])
-            restaurant.setNumReviews(numReviewsList[i])
+            val review = ReviewModel()
+            review.setUsername(getString(nameList[i]))
+            review.setReviewText(distanceList[i].toString())
+            review.setRating(numReviewsList[i])
+            review.setLocation("New York Pizza")
+            review.setImage(0)
 
-            list.add(restaurant)
+            list.add(review)
         }
         return list
     }
