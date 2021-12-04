@@ -16,6 +16,7 @@
         app:titleTextColor="@color/white" />
 
     <TextView
+        android:id="@+id/restaurant_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="PLACEHOLDER RESTAURANT INFO"/>
@@ -24,7 +25,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/review_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:minHeight="56dp" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

@@ -1,10 +1,10 @@
-package com.example.restaurantreviewapp.adapters
+package com.example.restaurantReviewApp.adapters
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.restaurantreviewapp.fragments.SettingsFragment
-import com.example.restaurantreviewapp.fragments.MyReviewsFragment
+import com.example.restaurantReviewApp.fragments.SettingsFragment
+import com.example.restaurantReviewApp.fragments.MyReviewsFragment
 
 class AccountTabAdapter (activity: AppCompatActivity) : FragmentStateAdapter(activity) {
     override fun createFragment(index: Int): Fragment {

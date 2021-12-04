@@ -1,19 +1,24 @@
-package com.example.restaurantreviewapp
+package com.example.restaurantReviewApp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.NavUtils
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.restaurantreviewapp.adapters.ReviewAdapter
-import com.example.restaurantreviewapp.models.ReviewModel
+import com.example.restaurantReviewApp.adapters.ReviewAdapter
+import com.example.restaurantReviewApp.models.ReviewModel
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.storage.FirebaseStorage
 
 
 class RestaurantActivity : AppCompatActivity() {
+    //private lateinit val mStorage
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_restaurant)
@@ -29,6 +34,11 @@ class RestaurantActivity : AppCompatActivity() {
         recyclerView.layoutManager = layoutManager
         val mAdapter = ReviewAdapter(reviewModelArrayList)
         recyclerView.adapter = mAdapter
+
+        val mStorage = FirebaseStorage.getInstance()
+        val restaurantDescription = findViewById<TextView>(R.id.restaurant_description)
+        val currentUser = FirebaseAuth.getInstance().currentUser?.displayName
+        restaurantDescription.text = currentUser.toString()
     }
 
     private fun populateList(): MutableList<ReviewModel> {
@@ -66,6 +76,8 @@ class RestaurantActivity : AppCompatActivity() {
     }
 
 
-
+    private fun uploadFile() {
+        //val uploadRef = mStorage
+    }
 
 }

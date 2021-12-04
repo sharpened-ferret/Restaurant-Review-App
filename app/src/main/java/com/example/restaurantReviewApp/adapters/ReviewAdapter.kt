@@ -1,15 +1,13 @@
-package com.example.restaurantreviewapp.adapters
+package com.example.restaurantReviewApp.adapters
 
-import android.media.Image
 import android.view.LayoutInflater
 import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import com.example.restaurantreviewapp.*
-import com.example.restaurantreviewapp.models.ReviewModel
-import com.google.android.material.snackbar.Snackbar
+import com.example.restaurantReviewApp.*
+import com.example.restaurantReviewApp.models.ReviewModel
 
 class ReviewAdapter(private val reviewModelArrayList: MutableList<ReviewModel>) : RecyclerView.Adapter<ReviewAdapter.ViewHolder>() {
     override fun onCreateViewHolder(

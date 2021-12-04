@@ -1,4 +1,4 @@
-package com.example.restaurantreviewapp.adapters
+package com.example.restaurantReviewApp.adapters
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat.startActivity
-import com.example.restaurantreviewapp.*
-import com.example.restaurantreviewapp.models.RestaurantModel
+import com.example.restaurantReviewApp.*
+import com.example.restaurantReviewApp.models.RestaurantModel
 import com.google.android.material.snackbar.Snackbar
 
 class RestaurantAdapter(private val imageModelArrayList: MutableList<RestaurantModel>) : RecyclerView.Adapter<RestaurantAdapter.ViewHolder>() {

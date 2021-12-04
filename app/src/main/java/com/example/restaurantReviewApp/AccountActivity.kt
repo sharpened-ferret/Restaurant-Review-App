@@ -1,4 +1,4 @@
-package com.example.restaurantreviewapp
+package com.example.restaurantReviewApp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,7 +7,7 @@ import android.view.MenuItem
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.NavUtils
 import androidx.viewpager2.widget.ViewPager2
-import com.example.restaurantreviewapp.adapters.AccountTabAdapter
+import com.example.restaurantReviewApp.adapters.AccountTabAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 

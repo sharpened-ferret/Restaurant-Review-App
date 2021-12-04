@@ -1,4 +1,4 @@
-package com.example.restaurantreviewapp.models
+package com.example.restaurantReviewApp.models
 
 class RestaurantModel {
     var restaurantName: String? = null

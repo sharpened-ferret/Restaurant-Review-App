@@ -1,6 +1,4 @@
-package com.example.restaurantreviewapp.models
-
-import android.media.Image
+package com.example.restaurantReviewApp.models
 
 class ReviewModel {
     private var username: String? = null

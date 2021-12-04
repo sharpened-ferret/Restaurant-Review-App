@@ -5,9 +5,7 @@
     <string name="restaurant_refresh_title">Refresh</string>
     <string name="restaurant_logout_title">Logout</string>
     <string name="restaurant_account_title">Account</string>
-    <string name="refresh_message">Page Refresh Notification (Placeholder)</string>
 
-    <string name="kilometers">km</string>
     <string name="restaurant_label">Restaurant:</string>
     <string name="distance_label">Distance:</string>
     <string name="num_reviews_label">Number of Reviews:</string>
@@ -37,5 +35,5 @@
     <string name="dark_mode">Dark Mode</string>
 
     <string name="my_reviews_label">My Reviews</string>
-    <string name="title_activity_maps">MapsActivity</string>
+    <string name="title_activity_login">LoginActivity</string>
 </resources>
