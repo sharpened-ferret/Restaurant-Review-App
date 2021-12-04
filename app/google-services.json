@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "178079952087",
+    "project_id": "semiotic-bloom-329211",
+    "storage_bucket": "semiotic-bloom-329211.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:178079952087:android:e68430773257809b7f1492",
+        "android_client_info": {
+          "package_name": "com.example.restaurantReviewApp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "178079952087-36po4fo862i9fk739pphghj1vpftg24p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOD6C2neuvz9-yb5Wy11f3-CE_9eI3T2I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "178079952087-36po4fo862i9fk739pphghj1vpftg24p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

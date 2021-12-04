@@ -1,20 +1,23 @@
-package com.example.restaurantreviewapp.adapter
+package com.example.restaurantreviewapp.adapters
 
+import android.content.Intent
 import android.view.LayoutInflater
 import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import com.example.restaurantreviewapp.*
+import com.example.restaurantreviewapp.models.RestaurantModel
 import com.google.android.material.snackbar.Snackbar
 
-class ReviewAdapter(private val imageModelArrayList: MutableList<ReviewModel>) : RecyclerView.Adapter<ReviewAdapter.ViewHolder>() {
+class RestaurantAdapter(private val imageModelArrayList: MutableList<RestaurantModel>) : RecyclerView.Adapter<RestaurantAdapter.ViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val v = inflater.inflate(R.layout.review_row_layout, parent, false)
+        val v = inflater.inflate(R.layout.restaurant_row_layout, parent, false)
 
         return ViewHolder(v)
     }
@@ -46,6 +49,9 @@ class ReviewAdapter(private val imageModelArrayList: MutableList<ReviewModel>) :
             val numReviews = numReviews.text
             val snackbar = Snackbar.make(v, "$name $distance $numReviews", Snackbar.LENGTH_LONG)
             snackbar.show()
+
+            val restaurantIntent = Intent(itemView.context, RestaurantActivity::class.java)
+            startActivity(itemView.context, restaurantIntent, null)
         }
     }
 }

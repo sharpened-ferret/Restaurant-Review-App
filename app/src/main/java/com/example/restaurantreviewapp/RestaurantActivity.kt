@@ -9,7 +9,8 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.app.NavUtils
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.restaurantreviewapp.adapter.ReviewAdapter
+import com.example.restaurantreviewapp.adapters.ReviewAdapter
+import com.example.restaurantreviewapp.models.ReviewModel
 
 
 class RestaurantActivity : AppCompatActivity() {
@@ -38,9 +39,11 @@ class RestaurantActivity : AppCompatActivity() {
 
         for (i in 0..3) {
             val review = ReviewModel()
-            review.setName(getString(nameList[i]))
-            review.setDistance(distanceList[i])
-            review.setNumReviews(numReviewsList[i])
+            review.setUsername(getString(nameList[i]))
+            review.setReviewText(distanceList[i].toString())
+            review.setRating(numReviewsList[i])
+            review.setLocation("New York Pizza")
+            review.setImage(0)
 
             list.add(review)
         }

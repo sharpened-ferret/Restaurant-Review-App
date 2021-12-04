@@ -1,4 +1,4 @@
-package com.example.restaurantreviewapp.fragment
+package com.example.restaurantreviewapp.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,8 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.restaurantreviewapp.R
-import com.example.restaurantreviewapp.RestaurantModel
-import com.example.restaurantreviewapp.adapter.RestaurantAdapter
+import com.example.restaurantreviewapp.models.RestaurantModel
+import com.example.restaurantreviewapp.adapters.RestaurantAdapter
 
 class MyReviewsFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
