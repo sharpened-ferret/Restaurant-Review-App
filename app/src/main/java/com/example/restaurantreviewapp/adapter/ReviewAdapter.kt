@@ -1,12 +1,10 @@
 package com.example.restaurantreviewapp.adapter
 
-import android.content.Intent
 import android.view.LayoutInflater
 import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.core.content.ContextCompat.startActivity
 import com.example.restaurantreviewapp.*
 import com.google.android.material.snackbar.Snackbar
 
