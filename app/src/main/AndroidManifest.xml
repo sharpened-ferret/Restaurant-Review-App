@@ -34,6 +34,10 @@
             android:exported="true"
             android:parentActivityName=".MainActivity" />
         <activity
+            android:name=".RestaurantActivity"
+            android:exported="true"
+            android:parentActivityName=".MainActivity" />
+        <activity
             android:name=".MainActivity"
             android:exported="true" />
     </application>

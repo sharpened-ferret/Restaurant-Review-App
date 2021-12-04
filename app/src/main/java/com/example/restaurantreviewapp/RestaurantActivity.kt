@@ -4,39 +4,47 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.NavUtils
-import androidx.viewpager2.widget.ViewPager2
-import com.example.restaurantreviewapp.adapter.AccountTabAdapter
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.restaurantreviewapp.adapter.ReviewAdapter
 
 
 class RestaurantActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_account)
+        setContentView(R.layout.activity_restaurant)
 
         val toolbar = findViewById<Toolbar>(R.id.secondary_toolbar)
         setSupportActionBar(toolbar)
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true);
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val tabLayout = findViewById<TabLayout>(R.id.tab_layout)
-        val viewPager = findViewById<ViewPager2>(R.id.view_pager)
+        val reviewModelArrayList = populateList()
+        val recyclerView = findViewById<View>(R.id.review_recycler_view) as RecyclerView // Bind to the recyclerview in the layout
+        val layoutManager = LinearLayoutManager(this) // Get the layout manager
+        recyclerView.layoutManager = layoutManager
+        val mAdapter = ReviewAdapter(reviewModelArrayList)
+        recyclerView.adapter = mAdapter
+    }
 
-        val tabTitles = resources.getStringArray(R.array.accountTabTitles)
-        viewPager.adapter = AccountTabAdapter(this)
-        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-            when (position) {
-                0 -> {
-                    tab.text = tabTitles[0]
-                }
-                1 -> {
-                    tab.text = tabTitles[1]
-                }
-            }
-        }.attach()
+    private fun populateList(): MutableList<ReviewModel> {
+        val list = ArrayList<ReviewModel>()
+        val nameList = arrayOf(R.string.new_york_pizza, R.string.monnis, R.string.turtle_bay, R.string.basekamp)
+        val distanceList = arrayOf(0.2, 0.3, 1.2, 1.4)
+        val numReviewsList = arrayOf(3, 0, 2, 8)
+
+        for (i in 0..3) {
+            val review = ReviewModel()
+            review.setName(getString(nameList[i]))
+            review.setDistance(distanceList[i])
+            review.setNumReviews(numReviewsList[i])
+
+            list.add(review)
+        }
+        return list
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -53,6 +61,8 @@ class RestaurantActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+
+
 
 
 }
