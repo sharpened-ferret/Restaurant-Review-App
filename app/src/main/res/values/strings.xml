@@ -39,4 +39,6 @@
 
     <string name="my_reviews_label">My Reviews</string>
     <string name="title_activity_login">LoginActivity</string>
+
+    <string name="PLACEHOLDER_RESTAURANT_INFO">PLACEHOLDER</string>
 </resources>

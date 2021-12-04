@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.restaurantReviewApp.adapters.ReviewAdapter
 import com.example.restaurantReviewApp.models.ReviewModel
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 
 
@@ -36,6 +38,7 @@ class RestaurantActivity : AppCompatActivity() {
         recyclerView.adapter = mAdapter
 
         val mStorage = FirebaseStorage.getInstance()
+        val db = Firebase.firestore
         val restaurantDescription = findViewById<TextView>(R.id.restaurant_description)
         val currentUser = FirebaseAuth.getInstance().currentUser?.displayName
         restaurantDescription.text = currentUser.toString()

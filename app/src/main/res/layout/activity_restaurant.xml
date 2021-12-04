@@ -19,7 +19,7 @@
         android:id="@+id/restaurant_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="PLACEHOLDER RESTAURANT INFO"/>
+        android:text="@+string/PLACEHOLDER_RESTAURANT_INFO"/>
 
 
     <androidx.recyclerview.widget.RecyclerView
