@@ -1,18 +1,22 @@
 package com.example.restaurantReviewApp
 
+import android.app.SearchManager
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
 import androidx.viewpager2.widget.ViewPager2
 import com.example.restaurantReviewApp.adapters.MainTabAdapter
+import com.example.restaurantReviewApp.fragments.RestaurantsFragment
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
-import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_LONG
 import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_SHORT
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
@@ -22,6 +26,7 @@ import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
     private lateinit var menu : Menu
+    lateinit var filter : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +51,13 @@ class MainActivity : AppCompatActivity() {
             }
         }.attach()
 
+        if (Intent.ACTION_SEARCH == intent.action) {
+            intent.getStringExtra(SearchManager.QUERY)?.also { query ->
+                Log.d("SEARCHRESULT", query)
+                doMySearch(query)
+            }
+        }
+
         createSignInIntent()
     }
 
@@ -55,6 +67,14 @@ class MainActivity : AppCompatActivity() {
             this.menu = menu
             menu.findItem(R.id.account).isVisible = false
         }
+
+        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        (menu?.findItem(R.id.search)?.actionView as SearchView).apply {
+            // Assumes current activity is the searchable activity
+            setSearchableInfo(searchManager.getSearchableInfo(componentName))
+            setIconifiedByDefault(true)
+        }
+
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -135,5 +155,9 @@ class MainActivity : AppCompatActivity() {
         FirebaseAuthUIActivityResultContract()
     ) { res ->
         this.onSignInResult(res)
+    }
+
+    private fun doMySearch(query : String) {
+
     }
 }

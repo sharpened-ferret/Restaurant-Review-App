@@ -1,11 +1,15 @@
 package com.example.restaurantReviewApp.fragments
 
+import android.app.SearchManager
 import android.content.ContentValues.TAG
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -22,6 +26,7 @@ class RestaurantsFragment : Fragment() {
     private lateinit var db : FirebaseFirestore
     private lateinit var restaurantList : ArrayList<RestaurantModel>
     private lateinit var restaurantAdapter : RestaurantAdapter
+    lateinit var filter : String
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
         inflater.inflate(R.layout.fragment_restaurants, container, false)!!
@@ -37,7 +42,6 @@ class RestaurantsFragment : Fragment() {
         recyclerView.layoutManager = layoutManager
         restaurantAdapter = RestaurantAdapter(restaurantList)
         recyclerView.adapter = restaurantAdapter
-
         EventChangeListener()
     }
 
@@ -53,7 +57,6 @@ class RestaurantsFragment : Fragment() {
                     for (dc : DocumentChange in value?.documentChanges!!) {
                         if (dc.type == DocumentChange.Type.ADDED) {
                             var restaurantModel = dc.document.toObject(RestaurantModel::class.java)
-                            Log.d(TAG, "HERE2!"+restaurantModel.name)
                             restaurantList.add(restaurantModel)
                         }
                     }

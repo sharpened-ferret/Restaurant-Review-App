@@ -12,7 +12,6 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat.startActivity
 import com.example.restaurantReviewApp.*
 import com.example.restaurantReviewApp.models.RestaurantModel
-import com.google.android.material.snackbar.Snackbar
 
 class RestaurantAdapter(private val restaurantModelArrayList: MutableList<RestaurantModel>) : RecyclerView.Adapter<RestaurantAdapter.ViewHolder>() {
 
@@ -55,8 +54,6 @@ class RestaurantAdapter(private val restaurantModelArrayList: MutableList<Restau
             val name = name.text
             val distance = distance.text
             val numReviews = numReviews.text
-            val snackbar = Snackbar.make(v, "$name $distance $numReviews", Snackbar.LENGTH_LONG)
-            snackbar.show()
             val dataBundle = Bundle()
             dataBundle.putString("restaurant_name", name.toString())
             dataBundle.putString("restaurant_uid", uid)

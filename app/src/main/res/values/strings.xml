@@ -41,4 +41,12 @@
     <string name="title_activity_login">LoginActivity</string>
 
     <string name="PLACEHOLDER_RESTAURANT_INFO">PLACEHOLDER</string>
+
+    <string name="app_label">Restaurant Review App</string>
+    <string name="search_hint">Restaurant Name</string>
+
+    <string name="restaurant_rating_label">Rating:</string>
+    <string name="restaurant_latitude_label">Latitude:</string>
+    <string name="restaurant_longitude_label">Longitude:</string>
+    <string name="edit_review_label">Edit Review</string>
 </resources>

@@ -8,8 +8,10 @@ import android.util.Log.INFO
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
+import androidx.cardview.widget.CardView
 import androidx.core.app.NavUtils
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -28,6 +30,7 @@ class RestaurantActivity : AppCompatActivity() {
     private lateinit var db : FirebaseFirestore
     private lateinit var reviewList : ArrayList<ReviewModel>
     private lateinit var reviewAdapter : ReviewAdapter
+    private lateinit var restaurantUid : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +42,7 @@ class RestaurantActivity : AppCompatActivity() {
 
         val bundle = intent.extras
         val restaurantName = bundle?.getString("restaurant_name")
-        val restaurantUID = bundle?.getString("restaurant_uid").toString()
+        restaurantUid = bundle?.getString("restaurant_uid").toString()
         toolbar.title = restaurantName
         setSupportActionBar(toolbar)
 
@@ -53,12 +56,11 @@ class RestaurantActivity : AppCompatActivity() {
 
         val restaurantDescription = findViewById<TextView>(R.id.restaurant_description)
 
-        val docRef = db.collection("restaurants").document(restaurantUID)
+        val docRef = db.collection("restaurants").document(restaurantUid)
         val source = Source.DEFAULT
         docRef.get(source).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val document = task.result
-                Log.d(TAG, "Cached document data: ${document?.data}")
                 restaurantDescription.text = document?.get("description").toString()
 
             } else {
@@ -67,8 +69,51 @@ class RestaurantActivity : AppCompatActivity() {
         }
 
 
-        val currentUser = FirebaseAuth.getInstance().currentUser?.displayName
-        restaurantDescription.text = currentUser.toString()
+
+        val currentUser = FirebaseAuth.getInstance().currentUser
+
+        // Hides the 'post review' section for unregistered users
+        if (currentUser == null) {
+            val addReviewBlock = findViewById<CardView>(R.id.add_review)
+            addReviewBlock.visibility = View.INVISIBLE
+        }
+        // Populates any existing review data the current user has for this restaurant
+        else {
+            db.collection("reviews")
+                .whereEqualTo("userId", currentUser.uid)
+                .whereEqualTo("restaurantId", restaurantUid)
+                .get(Source.DEFAULT)
+                .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val userReview = task.result
+                    val reviewText = findViewById<EditText>(R.id.edit_review_text)
+                    val rating = findViewById<EditText>(R.id.rating)
+                    val latitude = findViewById<EditText>(R.id.latitude)
+                    val longitude = findViewById<EditText>(R.id.longitude)
+                    if (userReview!!.documents.isNotEmpty()) {
+                        val addReviewLabel = findViewById<TextView>(R.id.add_review_label)
+                        addReviewLabel.text = resources.getString(R.string.edit_review_label)
+                        val reviewDoc = userReview.documents[0]
+                        reviewText.setText(
+                            reviewDoc.get("reviewText").toString()
+                        )
+                        rating.setText(
+                            reviewDoc.get("rating").toString()
+                        )
+                        val geoPoint = reviewDoc.get("location") as GeoPoint
+                        latitude.setText(
+                            geoPoint.latitude.toString()
+                        )
+                        longitude.setText(
+                            geoPoint.longitude.toString()
+                        )
+
+                        //TODO Handle loading existing review data
+                    }
+                }
+                    Log.d("InsanityCheck:", currentUser.uid + ", " + restaurantUid)
+            }
+        }
 
 
         EventChangeListener()
@@ -98,6 +143,7 @@ class RestaurantActivity : AppCompatActivity() {
     private fun EventChangeListener() {
         db.collection("reviews")
             .whereNotEqualTo("userId", FirebaseAuth.getInstance().currentUser?.uid)
+            .whereEqualTo("restaurantId", restaurantUid)
             .addSnapshotListener(object : EventListener<QuerySnapshot>{
                 override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
                     if (error != null) {
@@ -109,7 +155,7 @@ class RestaurantActivity : AppCompatActivity() {
                             reviewList.add(dc.document.toObject(ReviewModel::class.java))
                         }
                     }
-
+                    //Calls to update the displayed reviews
                     reviewAdapter.notifyDataSetChanged()
                 }
 

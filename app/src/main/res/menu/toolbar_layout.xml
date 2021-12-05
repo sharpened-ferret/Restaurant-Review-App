@@ -5,6 +5,7 @@
         android:id="@+id/search"
         android:icon="@drawable/restaurant_search"
         android:title="@string/search_title"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="always" />
     <item
         android:id="@+id/filter"
