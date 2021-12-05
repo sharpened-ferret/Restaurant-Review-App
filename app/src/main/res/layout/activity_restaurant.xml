@@ -69,7 +69,7 @@
 
                 <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
+                    android:layout_height="match_parent">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -119,6 +119,15 @@
                         android:layout_height="wrap_content"
                         android:ems="10"
                         android:inputType="numberDecimal" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                    <com.google.android.material.button.MaterialButton android:translationX="310sp"
+                        android:id="@+id/submit_review"
+                        android:text="@string/submit_review"/>
                 </TableRow>
             </TableLayout>
 

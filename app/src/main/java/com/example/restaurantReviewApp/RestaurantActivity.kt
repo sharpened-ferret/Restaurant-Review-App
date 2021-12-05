@@ -19,6 +19,7 @@ import com.example.restaurantReviewApp.adapters.RestaurantAdapter
 import com.example.restaurantReviewApp.adapters.ReviewAdapter
 import com.example.restaurantReviewApp.models.RestaurantModel
 import com.example.restaurantReviewApp.models.ReviewModel
+import com.google.android.material.button.MaterialButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
 import com.google.firebase.firestore.ktx.firestore
@@ -68,9 +69,38 @@ class RestaurantActivity : AppCompatActivity() {
             }
         }
 
-
-
         val currentUser = FirebaseAuth.getInstance().currentUser
+
+        val reviewText = findViewById<EditText>(R.id.edit_review_text)
+        val rating = findViewById<EditText>(R.id.rating)
+        val latitude = findViewById<EditText>(R.id.latitude)
+        val longitude = findViewById<EditText>(R.id.longitude)
+
+        val reviewSubmit = findViewById<MaterialButton>(R.id.submit_review)
+        reviewSubmit.setOnClickListener {
+            val latitudeVal = latitude.text.toString().toDouble()
+            val longitudeVal : Double
+            longitudeVal = longitude.text.toString().toDouble()
+
+            val location = GeoPoint(latitudeVal, longitudeVal)
+
+            val review = hashMapOf(
+                "username" to currentUser?.displayName.toString(),
+                "userId" to currentUser?.uid.toString(),
+                "restaurantId" to restaurantUid,
+                "rating" to rating.text.toString().toLong(),
+                "location" to location,
+                "imageUri" to "",
+                "reviewText" to reviewText.text.toString(),
+            )
+
+            db.collection("reviews")
+                .add(review)
+                .addOnSuccessListener { documentReference ->
+                    Log.d("ReviewLog", "DocumentSnapshot added with ID: ${documentReference.id}")
+                }
+        }
+
 
         // Hides the 'post review' section for unregistered users
         if (currentUser == null) {
@@ -86,10 +116,7 @@ class RestaurantActivity : AppCompatActivity() {
                 .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val userReview = task.result
-                    val reviewText = findViewById<EditText>(R.id.edit_review_text)
-                    val rating = findViewById<EditText>(R.id.rating)
-                    val latitude = findViewById<EditText>(R.id.latitude)
-                    val longitude = findViewById<EditText>(R.id.longitude)
+
                     if (userReview!!.documents.isNotEmpty()) {
                         val addReviewLabel = findViewById<TextView>(R.id.add_review_label)
                         addReviewLabel.text = resources.getString(R.string.edit_review_label)
