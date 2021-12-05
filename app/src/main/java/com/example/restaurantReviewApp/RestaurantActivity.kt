@@ -44,7 +44,6 @@ class RestaurantActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        //val reviewModelArrayList = populateList(restaurantUID)
         val recyclerView = findViewById<View>(R.id.review_recycler_view) as RecyclerView // Bind to the recyclerview in the layout
         val layoutManager = LinearLayoutManager(this) // Get the layout manager
         recyclerView.layoutManager = layoutManager
@@ -75,49 +74,6 @@ class RestaurantActivity : AppCompatActivity() {
 
     }
 
-//    private fun populateList(restaurantUID : String): MutableList<ReviewModel> {
-//        val list = ArrayList<ReviewModel>()
-//        val nameList = ArrayList<String>()
-//        val reviewTextList = ArrayList<String>()
-//        val ratingList = ArrayList<Int>()
-//        db.collection("reviews")
-//            .get(Source.DEFAULT)
-//            .addOnSuccessListener { result ->
-//                for (document in result) {
-//                    Log.d("DocumentReturn: ", "${document.id} => ${document.data}")
-////                    nameList.add(document["user_id"] as String)
-////                    Log.d("TestDocumentReturn", document["user_id"] as String)
-////                    reviewTextList.add(document["review_text"] as String)
-////                    ratingList.add((document["rating"] as Long).toInt())
-//
-//                    val reviewModel = ReviewModel()
-//                    reviewModel.setUsername(document["user_id"] as String)
-//                    reviewModel.setReviewText(document["review_text"] as String)
-//                    reviewModel.setRating((document["rating"] as Long).toInt())
-//                    reviewModel.setLocation("New York Pizza")
-//                    list.add(reviewModel)
-//                }
-//            }
-//            .addOnFailureListener { exception ->
-//                Log.w(TAG, "Error getting documents.", exception)
-//            }
-////        if (nameList.size > 0) {
-////            for (i in 0 until nameList.size) {
-////                val review = ReviewModel()
-////                review.setUsername(nameList[i])
-////                review.setReviewText(reviewTextList[i])
-////                review.setRating(ratingList[i])
-////                review.setLocation("New York Pizza")
-////                //review.setImage(0)
-////
-////                list.add(review)
-////            }
-////        }
-//        Log.d(TAG, "NameList: " + nameList.size)
-//        Log.d(TAG, "RecyclerListSize: " + list.size)
-//        return list
-//    }
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate((R.menu.secondary_toolbar_layout), menu)
         return super.onCreateOptionsMenu(menu)
@@ -140,6 +96,7 @@ class RestaurantActivity : AppCompatActivity() {
 
     private fun EventChangeListener() {
         db.collection("reviews")
+            .whereNotEqualTo("userId", FirebaseAuth.getInstance().currentUser?.uid)
             .addSnapshotListener(object : EventListener<QuerySnapshot>{
                 override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
                     if (error != null) {
