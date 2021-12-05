@@ -1,7 +1,9 @@
 package com.example.restaurantReviewApp
 
+import android.content.ContentValues.TAG
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.restaurantReviewApp.adapters.ReviewAdapter
 import com.example.restaurantReviewApp.models.ReviewModel
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.Source
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
@@ -26,6 +29,11 @@ class RestaurantActivity : AppCompatActivity() {
         setContentView(R.layout.activity_restaurant)
 
         val toolbar = findViewById<Toolbar>(R.id.secondary_toolbar)
+
+        val bundle = intent.extras
+        val restaurantName = bundle?.getString("restaurant_name")
+        val restaurantUID = bundle?.getString("restaurant_uid").toString()
+        toolbar.title = restaurantName
         setSupportActionBar(toolbar)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -37,11 +45,29 @@ class RestaurantActivity : AppCompatActivity() {
         val mAdapter = ReviewAdapter(reviewModelArrayList)
         recyclerView.adapter = mAdapter
 
-        val mStorage = FirebaseStorage.getInstance()
         val db = Firebase.firestore
         val restaurantDescription = findViewById<TextView>(R.id.restaurant_description)
         val currentUser = FirebaseAuth.getInstance().currentUser?.displayName
         restaurantDescription.text = currentUser.toString()
+
+        val docRef = db.collection("restaurants").document(restaurantUID)
+
+        val source = Source.DEFAULT
+
+
+        docRef.get(source).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                // Document found in the offline cache
+                val document = task.result
+                Log.d(TAG, "Cached document data: ${document?.data}")
+                restaurantDescription.text = document?.get("description").toString()
+
+            } else {
+                Log.d(TAG, "Cached get failed: ", task.exception)
+            }
+        }
+
+
     }
 
     private fun populateList(): MutableList<ReviewModel> {

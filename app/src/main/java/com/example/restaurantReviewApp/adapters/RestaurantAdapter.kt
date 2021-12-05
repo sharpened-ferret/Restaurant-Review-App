@@ -1,6 +1,7 @@
 package com.example.restaurantReviewApp.adapters
 
 import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.recyclerview.widget.RecyclerView
 import android.view.View
@@ -49,9 +50,12 @@ class RestaurantAdapter(private val restaurantModelArrayList: MutableList<Restau
             val numReviews = numReviews.text
             val snackbar = Snackbar.make(v, "$name $distance $numReviews", Snackbar.LENGTH_LONG)
             snackbar.show()
-
+            val dataBundle = Bundle()
+            dataBundle.putString("restaurant_name", name.toString())
+            dataBundle.putString("restaurant_uid", "JUcBjoVBORKVkfFpA62O")
             val restaurantIntent = Intent(itemView.context, RestaurantActivity::class.java)
-            startActivity(itemView.context, restaurantIntent, null)
+            restaurantIntent.putExtras(dataBundle)
+            startActivity(itemView.context, restaurantIntent, dataBundle)
         }
     }
 }
