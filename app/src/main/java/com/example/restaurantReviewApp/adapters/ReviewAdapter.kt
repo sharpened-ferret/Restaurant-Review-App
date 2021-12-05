@@ -23,11 +23,11 @@ class ReviewAdapter(private val reviewModelArrayList: MutableList<ReviewModel>) 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val info = reviewModelArrayList[position]
 
-        holder.username.text = info.getUsername()
-        holder.reviewText.text = info.getReviewText()
-        holder.rating.text = info.getRating().toString()
-        holder.location.text = info.getLocation()
-        holder.image.setImageResource(info.getImage())
+        holder.username.text = info.username
+        holder.reviewText.text = info.reviewText
+        holder.rating.text = info.rating.toString()
+//        holder.location.text = info.location.toString()
+//        holder.image.setImageResource(info.imageUri)
     }
 
     override fun getItemCount(): Int {
