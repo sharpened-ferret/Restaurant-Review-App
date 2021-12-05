@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.restaurantReviewApp.adapters.RestaurantAdapter
 import com.example.restaurantReviewApp.adapters.ReviewAdapter
+import com.example.restaurantReviewApp.models.RestaurantModel
 import com.example.restaurantReviewApp.models.ReviewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*

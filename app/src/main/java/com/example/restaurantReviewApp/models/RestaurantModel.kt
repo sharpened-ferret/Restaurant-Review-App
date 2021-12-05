@@ -1,31 +1,7 @@
 package com.example.restaurantReviewApp.models
 
-class RestaurantModel {
-    var restaurantName: String? = null
-    private var distance: Double = 0.0
-    private var numReviews: Int = 0
+import com.google.firebase.firestore.GeoPoint
 
-    fun getName() : String {
-        return restaurantName.toString()
-    }
-
-    fun setName(name: String) {
-        this.restaurantName = name
-    }
-
-    fun getDistance() : Double {
-        return distance
-    }
-
-    fun setDistance(distance: Double) {
-        this.distance = distance
-    }
-
-    fun getNumReviews() : Int {
-        return numReviews
-    }
-
-    fun setNumReviews(reviews: Int) {
-        this.numReviews = reviews
-    }
+data class RestaurantModel (var name: String, var location : GeoPoint, var description : String, var uid : String) {
+    constructor() : this("", GeoPoint(0.0,0.0), "", "")
 }

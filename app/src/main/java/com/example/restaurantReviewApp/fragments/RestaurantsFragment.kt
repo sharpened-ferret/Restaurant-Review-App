@@ -1,6 +1,8 @@
 package com.example.restaurantReviewApp.fragments
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,37 +12,55 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.restaurantReviewApp.R
 import com.example.restaurantReviewApp.adapters.RestaurantAdapter
 import com.example.restaurantReviewApp.models.RestaurantModel
+import com.example.restaurantReviewApp.models.ReviewModel
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.*
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class RestaurantsFragment : Fragment() {
+    private lateinit var db : FirebaseFirestore
+    private lateinit var restaurantList : ArrayList<RestaurantModel>
+    private lateinit var restaurantAdapter : RestaurantAdapter
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
         inflater.inflate(R.layout.fragment_restaurants, container, false)!!
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val restaurantModelArrayList = populateList()
+        db = Firebase.firestore
+        restaurantList = arrayListOf()
 
         val recyclerView = view.findViewById<View>(R.id.restaurant_recycler_view) as RecyclerView // Bind to the recyclerview in the layout
         val layoutManager = LinearLayoutManager(view.context) // Get the layout manager
         recyclerView.layoutManager = layoutManager
-        val mAdapter = RestaurantAdapter(restaurantModelArrayList)
-        recyclerView.adapter = mAdapter
+        restaurantAdapter = RestaurantAdapter(restaurantList)
+        recyclerView.adapter = restaurantAdapter
+
+        EventChangeListener()
     }
 
-    private fun populateList() : ArrayList<RestaurantModel> {
-        val list = ArrayList<RestaurantModel>()
-        val nameList = arrayOf(R.string.new_york_pizza, R.string.monnis, R.string.turtle_bay, R.string.basekamp)
-        val distanceList = arrayOf(0.2, 0.3, 1.2, 1.4)
-        val numReviewsList = arrayOf(3, 0, 2, 8)
 
-        for (i in 0..3) {
-            val restaurant = RestaurantModel()
-            restaurant.setName(getString(nameList[i]))
-            restaurant.setDistance(distanceList[i])
-            restaurant.setNumReviews(numReviewsList[i])
+    private fun EventChangeListener() {
+        db.collection("restaurants")
+            .addSnapshotListener(object : EventListener<QuerySnapshot> {
+                override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
+                    if (error != null) {
+                        Log.e("FireStore Recycler Error", error.message.toString())
+                        return
+                    }
+                    for (dc : DocumentChange in value?.documentChanges!!) {
+                        if (dc.type == DocumentChange.Type.ADDED) {
+                            var restaurantModel = dc.document.toObject(RestaurantModel::class.java)
+                            Log.d(TAG, "HERE2!"+restaurantModel.name)
+                            restaurantList.add(restaurantModel)
+                        }
+                    }
 
-            list.add(restaurant)
-        }
-        return list
+                    restaurantAdapter.notifyDataSetChanged()
+                }
+
+            })
     }
 }

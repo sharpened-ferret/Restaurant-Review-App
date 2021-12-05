@@ -1,7 +1,9 @@
 package com.example.restaurantReviewApp.adapters
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import androidx.recyclerview.widget.RecyclerView
 import android.view.View
@@ -13,6 +15,7 @@ import com.example.restaurantReviewApp.models.RestaurantModel
 import com.google.android.material.snackbar.Snackbar
 
 class RestaurantAdapter(private val restaurantModelArrayList: MutableList<RestaurantModel>) : RecyclerView.Adapter<RestaurantAdapter.ViewHolder>() {
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -26,9 +29,12 @@ class RestaurantAdapter(private val restaurantModelArrayList: MutableList<Restau
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val info = restaurantModelArrayList[position]
 
-        holder.name.text = info.getName()
-        holder.distance.text = info.getDistance().toString() + "km"
-        holder.numReviews.text = info.getNumReviews().toString() + " Reviews"
+        Log.d(TAG, "HERE!"+restaurantModelArrayList[0].name)
+
+        holder.name.text = info.name
+        holder.distance.text = "km"
+        holder.numReviews.text = " Stars"
+        holder.uid = info.uid
     }
 
     override fun getItemCount(): Int {
@@ -39,6 +45,7 @@ class RestaurantAdapter(private val restaurantModelArrayList: MutableList<Restau
         var name = itemView.findViewById<View>(R.id.name) as TextView
         var distance = itemView.findViewById<View>(R.id.distance) as TextView
         var numReviews = itemView.findViewById<View>(R.id.numReviews) as TextView
+        var uid = ""
 
         init {
             itemView.setOnClickListener(this)
@@ -52,7 +59,7 @@ class RestaurantAdapter(private val restaurantModelArrayList: MutableList<Restau
             snackbar.show()
             val dataBundle = Bundle()
             dataBundle.putString("restaurant_name", name.toString())
-            dataBundle.putString("restaurant_uid", "JUcBjoVBORKVkfFpA62O")
+            dataBundle.putString("restaurant_uid", uid)
             val restaurantIntent = Intent(itemView.context, RestaurantActivity::class.java)
             restaurantIntent.putExtras(dataBundle)
             startActivity(itemView.context, restaurantIntent, dataBundle)
