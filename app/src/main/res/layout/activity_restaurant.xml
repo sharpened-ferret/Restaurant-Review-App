@@ -13,14 +13,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/design_default_color_primary"
-        app:title="[Restaurant-Holder-Text]"
         app:titleTextColor="@color/white" />
 
     <TextView
         android:id="@+id/restaurant_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@+string/PLACEHOLDER_RESTAURANT_INFO"
         android:textSize="20sp" />
 
 
@@ -45,7 +43,7 @@
                 android:id="@+id/add_review_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Add Review"
+                android:text="@string/add_review"
                 android:textSize="20sp" />
 
             <EditText
@@ -54,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="Review Text"
+                android:text="@string/review_text"
                 android:textSize="20sp"
                 tools:layout_conversion_absoluteHeight="48dp"
                 tools:layout_conversion_absoluteWidth="236dp"

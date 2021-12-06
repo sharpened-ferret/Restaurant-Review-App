@@ -55,5 +55,7 @@
     <string name="image_reupload_button">Change Image</string>
 
     <string name="review_submitted">Review successfully submitted</string>
+    <string name="add_review">Add Review</string>
+    <string name="review_text">Review Text</string>
 
 </resources>
