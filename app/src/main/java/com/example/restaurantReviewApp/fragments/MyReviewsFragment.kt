@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.restaurantReviewApp.R
+import com.example.restaurantReviewApp.adapters.MyReviewAdapter
 import com.example.restaurantReviewApp.adapters.ReviewAdapter
 import com.example.restaurantReviewApp.models.ReviewModel
 import com.google.firebase.auth.FirebaseAuth
@@ -19,7 +20,7 @@ import com.google.firebase.ktx.Firebase
 class MyReviewsFragment : Fragment() {
     private lateinit var db : FirebaseFirestore
     private lateinit var reviewList : ArrayList<ReviewModel>
-    private lateinit var reviewAdapter : ReviewAdapter
+    private lateinit var reviewAdapter : MyReviewAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
         inflater.inflate(R.layout.fragment_my_reviews, container, false)!!
@@ -33,7 +34,7 @@ class MyReviewsFragment : Fragment() {
         val recyclerView = view.findViewById<View>(R.id.review_recycler_view) as RecyclerView // Bind to the recyclerview in the layout
         val layoutManager = LinearLayoutManager(view.context) // Get the layout manager
         recyclerView.layoutManager = layoutManager
-        reviewAdapter = ReviewAdapter(reviewList)
+        reviewAdapter = MyReviewAdapter(reviewList)
         recyclerView.adapter = reviewAdapter
 
         EventChangeListener()
