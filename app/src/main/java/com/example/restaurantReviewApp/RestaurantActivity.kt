@@ -1,5 +1,6 @@
 package com.example.restaurantReviewApp
 
+import android.app.Activity
 import android.content.ContentValues.TAG
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -25,21 +26,46 @@ import com.google.firebase.firestore.*
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.ktx.storage
+import android.content.Intent
+import android.net.Uri
+import android.provider.MediaStore
+import android.widget.ImageButton
+import android.widget.ImageView
+import androidx.activity.result.contract.ActivityResultContract
+import androidx.activity.result.contract.ActivityResultContracts
+
+import androidx.core.app.ActivityCompat.startActivityForResult
+import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_LONG
+import com.google.android.material.snackbar.Snackbar
 
 
 class RestaurantActivity : AppCompatActivity() {
     private lateinit var db : FirebaseFirestore
+    private lateinit var webStorage : FirebaseStorage
     private lateinit var reviewList : ArrayList<ReviewModel>
     private lateinit var reviewAdapter : ReviewAdapter
     private lateinit var restaurantUid : String
+    private lateinit var imageView: ImageView
+    private lateinit var imageUpload: MaterialButton
+    private var imageUri: Uri? = null
+
+    private val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri : Uri? ->
+        imageUri = uri
+        imageView.setImageURI(imageUri)
+        imageUpload.text = resources.getString(R.string.image_reupload_button)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_restaurant)
 
         db = Firebase.firestore
+        webStorage = Firebase.storage
         reviewList = arrayListOf()
         val toolbar = findViewById<Toolbar>(R.id.secondary_toolbar)
+        imageView = findViewById<ImageView>(R.id.image_view)
 
         val bundle = intent.extras
         val restaurantName = bundle?.getString("restaurant_name")
@@ -79,10 +105,18 @@ class RestaurantActivity : AppCompatActivity() {
         val reviewSubmit = findViewById<MaterialButton>(R.id.submit_review)
         reviewSubmit.setOnClickListener {
             val latitudeVal = latitude.text.toString().toDouble()
-            val longitudeVal : Double
-            longitudeVal = longitude.text.toString().toDouble()
+            val longitudeVal = longitude.text.toString().toDouble()
 
             val location = GeoPoint(latitudeVal, longitudeVal)
+
+            var imagePath = ""
+
+            if (imageUri != null) {
+                val storageRef = webStorage.reference
+                val imageRef = storageRef.child("review_images/${imageUri!!.lastPathSegment}")
+                val uploadTask = imageRef.putFile(imageUri!!)
+                imagePath = imageRef.path
+            }
 
             val review = hashMapOf(
                 "username" to currentUser?.displayName.toString(),
@@ -90,7 +124,7 @@ class RestaurantActivity : AppCompatActivity() {
                 "restaurantId" to restaurantUid,
                 "rating" to rating.text.toString().toLong(),
                 "location" to location,
-                "imageUri" to "",
+                "imageUri" to imagePath,
                 "reviewText" to reviewText.text.toString(),
             )
 
@@ -98,8 +132,19 @@ class RestaurantActivity : AppCompatActivity() {
                 .add(review)
                 .addOnSuccessListener { documentReference ->
                     Log.d("ReviewLog", "DocumentSnapshot added with ID: ${documentReference.id}")
+
                 }
+            val view = imageView
+            val snackbar = Snackbar.make(view, resources.getString(R.string.review_submitted), LENGTH_LONG)
+            snackbar.show()
+            reviewSubmit.text = resources.getString(R.string.resubmit_review)
         }
+
+        imageUpload = findViewById<MaterialButton>(R.id.image_upload)
+        imageUpload.setOnClickListener {
+            getContent.launch("image/*")
+        }
+
 
 
         // Hides the 'post review' section for unregistered users
@@ -134,11 +179,8 @@ class RestaurantActivity : AppCompatActivity() {
                         longitude.setText(
                             geoPoint.longitude.toString()
                         )
-
-                        //TODO Handle loading existing review data
                     }
                 }
-                    Log.d("InsanityCheck:", currentUser.uid + ", " + restaurantUid)
             }
         }
 

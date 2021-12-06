@@ -50,4 +50,9 @@
     <string name="restaurant_longitude_label">Longitude:</string>
     <string name="edit_review_label">Edit Review</string>
     <string name="submit_review">Submit</string>
+    <string name="resubmit_review">Resubmit</string>
+    <string name="image_upload_btn">Add Image</string>
+    <string name="image_reupload_button">Change Image</string>
+
+    <string name="review_submitted">Review successfully submitted</string>
 </resources>

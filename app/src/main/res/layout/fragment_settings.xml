@@ -44,22 +44,4 @@
         android:layout_marginTop="20sp"
         android:layout_marginBottom="20sp"
         android:background="?android:attr/listDivider" />
-
-    <TextView
-        android:id="@+id/display_settings_header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="5sp"
-        android:text="@string/display_settings_heading"
-        android:textSize="20sp" />
-
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/switch1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:checked="true"
-        android:minHeight="48dp"
-        android:paddingLeft="5sp"
-        android:text="@string/dark_mode" />
 </androidx.appcompat.widget.LinearLayoutCompat>
