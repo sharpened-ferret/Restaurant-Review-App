@@ -7,11 +7,7 @@
         android:title="@string/search_title"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="always" />
-    <item
-        android:id="@+id/filter"
-        android:icon="@drawable/restaurant_filter"
-        android:title="@string/filter_title"
-        app:showAsAction="ifRoom" />
+
     <item
         android:id="@+id/refresh"
         android:title="@string/refresh_title" />

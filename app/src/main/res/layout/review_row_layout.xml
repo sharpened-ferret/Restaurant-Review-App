@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="100dp"
+    android:layout_height="120dp"
     android:padding="6dip"
     android:background="@drawable/selector"
     android:clickable="true"
@@ -9,7 +9,7 @@
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/row_one"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -20,6 +20,17 @@
             android:layout_alignParentBottom="true"
             android:minWidth="180dp"
             android:paddingEnd="10sp"
+            android:textSize="24sp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:layout_toEndOf="@id/username"
+            android:minWidth="100dp"
+            android:paddingEnd="10sp"
+            android:text="@string/rating_label"
             android:textSize="22sp" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -33,40 +44,83 @@
             android:paddingEnd="10sp"
             android:textSize="22sp" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentBottom="true"
-            android:layout_toEndOf="@id/rating"
-            android:minWidth="100dp"
-            android:textSize="22sp" />
-
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/row_two"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/row_one">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/review_text"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentBottom="true"
             android:minWidth="100dp"
             android:paddingEnd="10sp"
-            android:textSize="22sp" />
+            android:textSize="18sp" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/row_three"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/row_two">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:paddingEnd="10sp"
+            android:text="@string/latitude_label"
+            android:textSize="20sp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/latitude"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:minWidth="60dp"
+            android:maxWidth="90dp"
+            android:paddingEnd="10sp"
+            android:textSize="20sp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:paddingEnd="10sp"
+            android:text="@string/longitude_label"
+            android:textSize="20sp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/longitude"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:minWidth="50dp"
+            android:paddingEnd="10sp"
+            android:textSize="20sp" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/row_four"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/row_three">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 </RelativeLayout>

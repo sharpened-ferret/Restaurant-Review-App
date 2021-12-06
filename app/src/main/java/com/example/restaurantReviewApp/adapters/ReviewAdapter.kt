@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.net.toUri
 import com.example.restaurantReviewApp.*
 import com.example.restaurantReviewApp.models.ReviewModel
 
@@ -23,11 +24,15 @@ class ReviewAdapter(private val reviewModelArrayList: MutableList<ReviewModel>) 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val info = reviewModelArrayList[position]
 
-        holder.username.text = info.username
-        holder.reviewText.text = info.reviewText
+        val latVal = info.location?.latitude.toString()
+        val longVal = info.location?.longitude.toString()
+
+        holder.username.text = info.username.toString()
+        holder.reviewText.text = info.reviewText.toString()
         holder.rating.text = info.rating.toString()
-//        holder.location.text = info.location.toString()
-//        holder.image.setImageResource(info.imageUri)
+        holder.longitude.text = longVal
+        holder.latitude.text = latVal
+        holder.image.setImageURI(info.imageUri?.toUri())
     }
 
     override fun getItemCount(): Int {
@@ -38,7 +43,8 @@ class ReviewAdapter(private val reviewModelArrayList: MutableList<ReviewModel>) 
         var username = itemView.findViewById<View>(R.id.username) as TextView
         var reviewText = itemView.findViewById<View>(R.id.review_text) as TextView
         var rating = itemView.findViewById<View>(R.id.rating) as TextView
-        var location = itemView.findViewById<View>(R.id.location) as TextView
+        var latitude = itemView.findViewById<View>(R.id.latitude) as TextView
+        var longitude = itemView.findViewById<View>(R.id.longitude) as TextView
         var image = itemView.findViewById<View>(R.id.image) as ImageView
 
         init {
