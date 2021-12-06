@@ -10,7 +10,7 @@
     <string name="logout_message">You\'re now logged out</string>
 
     <string name="restaurant_label">Restaurant:</string>
-    <string name="distance_label">Distance:</string>
+    <string name="description_label">Description:</string>
     <string name="num_reviews_label">Number of Reviews:</string>
 
     <string name="turtle_bay">Turtle Bay</string>

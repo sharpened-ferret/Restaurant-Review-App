@@ -12,6 +12,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat.startActivity
 import com.example.restaurantReviewApp.*
 import com.example.restaurantReviewApp.models.RestaurantModel
+import org.w3c.dom.Text
 
 class RestaurantAdapter(private val restaurantModelArrayList: MutableList<RestaurantModel>) : RecyclerView.Adapter<RestaurantAdapter.ViewHolder>() {
 
@@ -28,11 +29,8 @@ class RestaurantAdapter(private val restaurantModelArrayList: MutableList<Restau
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val info = restaurantModelArrayList[position]
 
-        Log.d(TAG, "HERE!"+restaurantModelArrayList[0].name)
-
         holder.name.text = info.name
-        holder.distance.text = "km"
-        holder.numReviews.text = " Stars"
+        holder.description.text = info.description
         holder.uid = info.uid
     }
 
@@ -42,8 +40,7 @@ class RestaurantAdapter(private val restaurantModelArrayList: MutableList<Restau
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
         var name = itemView.findViewById<View>(R.id.name) as TextView
-        var distance = itemView.findViewById<View>(R.id.distance) as TextView
-        var numReviews = itemView.findViewById<View>(R.id.numReviews) as TextView
+        var description = itemView.findViewById<View>(R.id.description) as TextView
         var uid = ""
 
         init {
@@ -52,8 +49,6 @@ class RestaurantAdapter(private val restaurantModelArrayList: MutableList<Restau
 
         override fun onClick(v: View) {
             val name = name.text
-            val distance = distance.text
-            val numReviews = numReviews.text
             val dataBundle = Bundle()
             dataBundle.putString("restaurant_name", name.toString())
             dataBundle.putString("restaurant_uid", uid)

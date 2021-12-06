@@ -18,24 +18,14 @@
         android:textSize="22sp" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/distance"
+        android:id="@+id/description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
         android:layout_toEndOf="@id/name"
-        android:minWidth="100dp"
+        android:minWidth="200dp"
         android:paddingEnd="10sp"
-        android:textSize="22sp" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/numReviews"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true"
-        android:layout_toEndOf="@id/distance"
-        android:minWidth="100dp"
         android:textSize="22sp" />
 
 </RelativeLayout>
